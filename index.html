@@ -26,13 +26,9 @@
     </ul>
   </body>
   <script>
-    app.onEvent("viewportChanged", () => {
-      if (!app.isExpanded) {
-        app.expand();
-      }
-    });
+    let tg = window.Telegram.WebApp; //получаем объект webapp телеграма
 
-    window.Telegram.WebApp.expand();
+    tg.expand();
   </script>
   <style>
     @font-face {
