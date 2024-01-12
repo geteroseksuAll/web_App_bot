@@ -26,9 +26,12 @@
     </ul>
   </body>
   <script>
+    let main_page = document.querySelector("#main_page");
     let tg = window.Telegram.WebApp; //получаем объект webapp телеграма
 
-    window.Telegram.WebApp.expand(); //расширяем на все окно
+    if (main_page) {
+      window.Telegram.WebApp.expand();
+    } //расширяем на все окно
   </script>
   <style>
     @font-face {
