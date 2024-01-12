@@ -7,10 +7,6 @@
   </head>
   <body>
     <img src="logo.png" />
-    <p class="header-text bold">Поддержите наш проект!</p>
-    <p class="explanation-text thin">
-      Помимо огромной благодарности, вы также можете пользоваться курсами.
-    </p>
     <p class="list-header-text bold">Возможности после покупки:</p>
     <ul class="advantages-list">
       <li class="advantages">⭐️ бессрочный доступ к материалам канала</li>
@@ -31,14 +27,19 @@
   </body>
   <script>
     let tg = window.Telegram.WebApp; //получаем объект webapp телеграма
-    tg.expand(); //расширяем на все окно
   </script>
   <style>
+    @font-face {
+      font-family: "Monserrat-Medium";
+      src: url("fonts/Monserrat-Medium.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+    }
     ul {
       list-style-type: none;
     }
     body {
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: "Monserrat-Medium";
       color: var(--tg-theme-text-color);
       background: var(--tg-theme-bg-color);
       display: flex;
