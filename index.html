@@ -11,7 +11,7 @@
     <p class="explanation-text thin">
       Помимо огромной благодарности, вы также можете пользоваться курсами.
     </p>
-    <p class="list-header-text">Возможности после покупки</p>
+    <p class="list-header-text bold">Возможности после покупки</p>
     <ul class="advantages-list">
       <li class="advantages">⭐️ бессрочный доступ к материалам канала</li>
       <li class="advantages">
@@ -34,7 +34,11 @@
     tg.expand(); //расширяем на все окно
   </script>
   <style>
+    ul {
+      list-style-type: none;
+    }
     body {
+      font-family: Arial, Helvetica, sans-serif;
       color: var(--tg-theme-text-color);
       background: var(--tg-theme-bg-color);
       display: flex;
@@ -42,8 +46,17 @@
       align-items: center;
       font-size: 18px;
     }
+    .bold {
+      font-size: 26px;
+    }
+    p {
+      text-align: center;
+    }
 
     .explanation-text {
+      color: var(--tg-theme-hint-color);
+    }
+    .advantages {
       color: var(--tg-theme-hint-color);
     }
 
@@ -55,8 +68,8 @@
     }
     img {
       border-radius: 10px;
-      width: 40px;
-      height: 40px;
+      width: 100px;
+      height: 100px;
     }
   </style>
 </html>
