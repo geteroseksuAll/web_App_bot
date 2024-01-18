@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <title>Title</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://yookassa.ru/checkout-widget/v1/checkout-widget.js"></script>
   </head>
+
   <body>
     <img src="logo.png" />
     <p class="list-header-text bold remove">Возможности после покупки:</p>
@@ -55,10 +57,50 @@
     console.log(button_method);
     console.log(document.getElementsByClassName("remove"));
 
-    function deleteElem() {}
+    document
+      .getElementById("make_payment")
+      .addEventListener("click", function () {
+        // Получаем значения параметров client_id и tariff из URL
+        var urlParams = new URLSearchParams(window.location.search);
+        var clientId = urlParams.get("client_id");
+        var requestUrl = "";
+        var tariff = document.querySelector(
+          'input[name="tariff"]:checked'
+        ).value;
+        if (clientId) {
+          requestUrl =
+            "/payments/request?level=" + tariff + "&client_id=" + clientId;
+        } else {
+          var tgWebAppStartParamURL = urlParams.get("tgWebAppStartParam");
+          tgWebAppStartParamURL = tgWebAppStartParamURL.replace(/=/, "%3D");
+          requestUrl =
+            "/payments/request?tgWebAppStartParam=" +
+            tgWebAppStartParamURL +
+            "___level%3D" +
+            tariff;
+        }
+        alert(requestUrl);
 
-    tg.expand();
+        // Формируем URL для запроса
+        // var requestUrl = '/payments/request?level=' + tariff + '&client_id=' + clientId;
+
+        // Отправляем запрос на сервер
+        fetch(requestUrl)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            // Обрабатываем результат
+            var resultUrl = data.result;
+            // Перенаправляем пользователя по ссылке из result
+            window.location.href = resultUrl;
+          })
+          .catch(function (error) {
+            console.log("Ошибка:", error);
+          });
+      });
   </script>
+
   <style>
     @font-face {
       font-family: "Montserrat-Medium";
