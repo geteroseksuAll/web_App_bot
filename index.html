@@ -46,7 +46,7 @@
         ✏️ Любителям литературы, желающим расширить свой кругозор
       </li>
     </ul>
-    <button type="button" class="pay_bttn bttn" onclick="deleteElem()">
+    <button type="button" id="make_payment" class="pay_bttn bttn">
       Оплатить
     </button>
   </body>
@@ -64,9 +64,7 @@
         var urlParams = new URLSearchParams(window.location.search);
         var clientId = urlParams.get("client_id");
         var requestUrl = "";
-        var tariff = document.querySelector(
-          'input[name="tariff"]:checked'
-        ).value;
+        var tariff = 200;
         if (clientId) {
           requestUrl =
             "/payments/request?level=" + tariff + "&client_id=" + clientId;
@@ -102,6 +100,9 @@
   </script>
 
   <style>
+    .bttn {
+      cursor: pointer;
+    }
     @font-face {
       font-family: "Montserrat-Medium";
       src: url(fonts/Montserrat-Medium.ttf);
