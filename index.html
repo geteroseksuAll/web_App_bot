@@ -4,11 +4,26 @@
     <meta charset="UTF-8" />
     <title>Title</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="https://yookassa.ru/checkout-widget/v1/checkout-widget.js"></script>
   </head>
-
   <body>
     <img src="logo.png" />
+    <p class="list-header-text bold show deleted">
+      Выберите канал, подписку на который хотите купить:
+    </p>
+    <div class="item show deleted">
+      <div class="checkbox-rect show deleted">
+        <input
+          type="checkbox"
+          id="checkbox-rect1"
+          name="check"
+          class="show deleted"
+          checked="checked"
+        />
+        <label for="checkbox-rect1" class="show deleted"
+          >Первый(доп инфа)</label
+        >
+      </div>
+    </div>
     <p class="list-header-text bold remove">Возможности после покупки:</p>
     <ul class="advantages-list remove">
       <li class="advantages remove">
@@ -46,63 +61,36 @@
         ✏️ Любителям литературы, желающим расширить свой кругозор
       </li>
     </ul>
-    <button type="button" id="make_payment" class="pay_bttn bttn">
+    <button type="button" class="pay_bttn bttn" onclick="deleteElem()">
       Оплатить
     </button>
   </body>
   <script>
-    let tg = window.Telegram.WebApp; //получаем объект webapp телеграма
+    let tg = window.Telegram.WebApp;
 
     let button_method = 0;
     console.log(button_method);
-    console.log(document.getElementsByClassName("remove"));
 
-    document
-      .getElementById("make_payment")
-      .addEventListener("click", function () {
-        // Получаем значения параметров client_id и tariff из URL
-        var urlParams = new URLSearchParams(window.location.search);
-        var clientId = urlParams.get("client_id");
-        var requestUrl = "";
-        var tariff = 200;
-        if (clientId) {
-          requestUrl =
-            "/payments/request?level=" + tariff + "&client_id=" + clientId;
-        } else {
-          var tgWebAppStartParamURL = urlParams.get("tgWebAppStartParam");
-          tgWebAppStartParamURL = tgWebAppStartParamURL.replace(/=/, "%3D");
-          requestUrl =
-            "/payments/request?tgWebAppStartParam=" +
-            tgWebAppStartParamURL +
-            "___level%3D" +
-            tariff;
-        }
-        alert(requestUrl);
+    function deleteElem() {
+      if (button_method == 0) {
+        var delete_array = document.getElementsByClassName("remove");
+        var show_array = document.getElementsByClassName("show");
 
-        // Формируем URL для запроса
-        // var requestUrl = '/payments/request?level=' + tariff + '&client_id=' + clientId;
-
-        // Отправляем запрос на сервер
-        fetch(requestUrl)
-          .then(function (response) {
-            return response.json();
-          })
-          .then(function (data) {
-            // Обрабатываем результат
-            var resultUrl = data.result;
-            // Перенаправляем пользователя по ссылке из result
-            window.location.href = resultUrl;
-          })
-          .catch(function (error) {
-            console.log("Ошибка:", error);
-          });
-      });
-  </script>
-
-  <style>
-    .bttn {
-      cursor: pointer;
+        Array.prototype.forEach.call(delete_array, function (el) {
+          el.classList.add("deleted");
+        });
+        Array.prototype.forEach.call(show_array, function (el) {
+          el.classList.remove("deleted");
+        });
+        button_method = 1;
+      } else {
+        ///засунуть сюда запрос
+      }
     }
+
+    tg.expand();
+  </script>
+  <style>
     @font-face {
       font-family: "Montserrat-Medium";
       src: url(fonts/Montserrat-Medium.ttf);
@@ -157,6 +145,52 @@
       border-radius: 40px;
       width: 80px;
       height: 80px;
+    }
+    .deleted {
+      display: none;
+    }
+    .item {
+      margin-bottom: 2em;
+    }
+
+    /* checkbox-rect */
+    .checkbox-rect input[type="checkbox"] {
+      display: none;
+    }
+    .checkbox-rect input[type="checkbox"] + label {
+      display: block;
+      position: relative;
+      padding-left: 35px;
+
+      cursor: pointer;
+    }
+    .checkbox-rect input[type="checkbox"] + label:last-child {
+      margin-bottom: 10px;
+    }
+    .checkbox-rect input[type="checkbox"] + label:before {
+      content: "";
+      display: block;
+      width: 0.9em;
+      height: 0.9em;
+      border: 1px solid #343a3f;
+      border-radius: 0.2em;
+      position: absolute;
+      left: 0;
+      top: 0;
+      -webkit-transition: all 0.2s, background 0.2s ease-in-out;
+      transition: all 0.2s, background 0.2s ease-in-out;
+      background: #f3f3f3;
+    }
+    .checkbox-rect input[type="checkbox"]:checked + label:before {
+      width: 0.9em;
+      height: 0.9em;
+      border-radius: 0.2em;
+      border: 2px solid #fff;
+      background: #50565a;
+      box-shadow: 0 0 0 1px #000;
+    }
+    .checkbox-rect {
+      margin-bottom: 30px;
     }
 
     @media screen and (min-width: 400px) {
