@@ -20,8 +20,17 @@
           checked="checked"
         />
         <label for="checkbox-rect1" class="show deleted"
-          >Первый(доп инфа)</label
+          >Покупка доступа к закрытому каналу "Лит-ра для сердца и
+          разума|XVIII-первая половина XIX
+          <span class="checkbox_price">499</span></label
         >
+        <div class="opisanie_checkbox">
+          На канале вы найдете: <br />
+          — Подкасты по произведениям от «Слова о полку Игореве» до «Шинели»
+          Гоголя <br />— Конспекты к каждому подкасту <br />— Дополнительный
+          материал в виде ссылок на лекции, видео <br />— Учебники, сборники в
+          PDF <br />— Авторские материалы
+        </div>
       </div>
     </div>
     <p class="list-header-text bold remove">Возможности после покупки:</p>
@@ -97,7 +106,13 @@
       font-weight: normal;
       font-style: normal;
     }
-    ul {
+    .opisanie_checkbox {
+      color: var(--tg-theme-hint-color);
+    }
+    .checkbox_price {
+      font-size: 20px;
+    }
+    .checbox ul {
       list-style-type: none;
     }
     body {
